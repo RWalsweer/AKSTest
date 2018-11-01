@@ -7,7 +7,7 @@
 
     <script type="text/javascript">
         Rally.onReady(function () {
-                Ext.define("CustomApp",{extend:"Rally.app.App",componentCls:"app",launch:function(){console.log("Starten van de applicatie")}});
+                Ext.define("CustomApp",{extend:"Rally.app.App",componentCls:"app",launch:function(){console.log("Starten van de applicatie"),this._LoadData()},_LoadData:function(){Ext.create("Rally.data.wsapi.Store",{model:"User Story",autoLoad:!0,listeners:{load:function(t,a,o){console.log("Data ontvangen",t,a,o),this._LoadGrid(t)},scope:this},fetch:["FormattedID","Name","ScheduleState"]})},_LoadGrid:function(t){var a=Ext.create("Rally.ui.grid.Grid",{store:t,columnCfgs:["FormattedID","Name"]});this.add(a),console.log("Wat is dit: ",this)}});
 
             Rally.launchApp('CustomApp', {
                 name:"AKSTest",
